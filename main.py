@@ -1,5 +1,3 @@
-
-
 def swap(list, round_x, round_y):
     if list[round_x][round_y] == 0:
         list[round_x][round_y] = 1
@@ -36,21 +34,21 @@ def chek(list):
 
 def chek2(list):
     if list[0][0] == 0:  # NW
-     list[0][0] = 2
+        list[0][0] = 2
     elif list[2][2] == 0:  # SE
-      list[2][2] = 2
+        list[2][2] = 2
     elif list[0][2] == 0:  # NE
-      list[0][2] = 2
+        list[0][2] = 2
     elif list[2][0] == 0:  # SW
-      list[2][0] = 2
+        list[2][0] = 2
     elif list[0][1] == 0:  # N
-      list[0][1] = 2
+        list[0][1] = 2
     elif list[1][0] == 2:  # W
-      list[1][0] = 2
+        list[1][0] = 2
     elif list[2][1] == 2:  # S
-      list[2][1] = 2
+        list[2][1] = 2
     elif list[2][2] == 2:  # E
-      list[2][2] = 2
+        list[2][2] = 2
     # if list[1][1] and list[0][0]:  # center and NW  Попытка сделать пк умнее
     #     if list[2][2] == 0:
     #         list[2][2] = 2
@@ -66,7 +64,6 @@ def chek2(list):
     # elif list[2][0] and list[2][2] == 2:  # SW
     #     if list[2][1] == 0:
     #         list[2][1] = 2
-
 
 
 def check_Win(list):
@@ -113,8 +110,8 @@ def redact_indx(x):
         x = 2
     return x
 
-def task2():
 
+def task2():
     two_list = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
     xy = list(map(int, input().split()))
@@ -165,12 +162,54 @@ def task2():
         if i > 3:
             print('\n')
 
+
 def task1():
     s = input('Введите строку: ').split()
-    print(' '.join(filter(lambda x: x not in ["АБВ", "абв"], s))) # Некий текст содержащий различные буквы в том числе АБВ и абв
+    print(' '.join(
+        filter(lambda x: x not in ["АБВ", "абв"], s)))  # Некий текст содержащий различные буквы в том числе АБВ и абв
+
+
+def task3():
+    def press(file, result):
+        with open(file, 'r', encoding='utf-8') as text:
+            with open(result, 'w', encoding='utf-8') as res:
+                inp_str = text.readline()
+                ind = 0
+                count = 1
+                while ind < len(inp_str) - 1:
+                    if inp_str[ind] == inp_str[ind + 1]:
+                        count += 1
+                    else:
+                        if count == 1:
+                            res.write(inp_str[ind])
+                        else:
+                            res.write(str(count) + inp_str[ind])
+                        count = 1
+                    ind += 1
+
+    def depress(file, result):
+        with open(file, 'r', encoding='utf-8') as text:
+            with open(result, 'w', encoding='utf-8') as res:
+                inp_str = text.readline()
+                count = ''
+                for letter in inp_str:
+                    if letter.isdigit():
+                        count += letter
+                    else:
+                        if not count:
+                            res.write(int(count) * letter)
+                        else:
+                            res.write(letter)
+                        count = ''
+
+    press('file.txt', 'result.txt')
+    depress('result.txt', 'result2.txt')
+
 
 task = int(input("Какую задачу хотите проверить?"))
 if task == 1:
     task1()
 elif task == 2:
     task2()
+elif task == 3:
+    task3()
