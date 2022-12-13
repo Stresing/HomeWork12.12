@@ -114,7 +114,7 @@ def redact_indx(x):
 def task2():
     two_list = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
 
-    xy = list(map(int, input().split()))
+    xy = list(map(int, input('Введите позицию вашего хода (индексация идёт с 1 до 3 например"1 3" будет первая строка 3ий столбец').split()))
     raound1_1 = redact_indx(xy[0])
     raound1_2 = redact_indx(xy[1])
     swap(two_list, raound1_1, raound1_2)
